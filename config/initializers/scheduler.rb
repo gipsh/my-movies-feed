@@ -5,7 +5,7 @@ require 'rufus-scheduler'
 s = Rufus::Scheduler.singleton
 
 
-s.every '1m' do
+s.every '30m' do
   Rails.logger.info "updating movies: it's #{Time.now}"
 
   tmdb_api_key = '374fb751924df3442d74e979d8f1c07f'
