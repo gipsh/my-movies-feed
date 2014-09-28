@@ -1,0 +1,37 @@
+#block-text.block
+  .content
+    %h2.title Home
+    .inner
+      .block
+        = link_to "[Just added]", :sort => "created_at", :sort_order => "desc", :view_type => @view
+        = link_to "[By title]", :sort => "title", :sort_order => "asc", :view_type => @view
+        = link_to "[Releases]", {:sort => "year", :sort_order => "desc", :view_type => @view}
+        - if @view == 'list'
+          = link_to "[view as mosaic]", :view_type => "mosaic"                
+        - else
+          = link_to "[view as list]", :view_type => "list"        
+    .inner
+      %p.first
+      - if @view == 'list'      
+        %table
+          %tbody
+            - @films.each do |f|
+              %tr
+                %td= link_to f.title+ " (" + f.year + ")", f
+                %td= f.genere
+                %td= f.quality
+                // %td= f.created_at
+                %td= link_to("magnet", f.magnet)
+      - else
+        %p.first
+          - form_tag users_path, :method => 'get' do
+            - text_field_tag :search, params[:search]
+            - submit_tag "Search", :name => nil
+          - @films.each do |f|
+            = link_to image_tag(f.cover, :style=> ''), f
+      %p= will_paginate @films
+      %p
+      %hr/
+      %p
+- if user_signed_in?            
+  - content_for :sidebar, render(:partial => 'sidebar')

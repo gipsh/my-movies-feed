@@ -1,0 +1,19 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+%channel
+  %title= @title
+  %description= "the product will make you happy"
+  %link= "http://insane.com.ar"
+  %language= "en-us"
+  %ttl= "15"
+  %atom:link{ :href => "http://rss.insane.com.ar/", :rel=> "self", :type=>"application/rss+xml"}
+  
+  - @news_items.each do |item|
+    %item
+      %title= cdata_section(item.title)
+      %categoriy= "film"
+      %description= item.description
+      %link= URI.encode(item.link)
+      %guid= item.id
+      %quality= item.quality
+      %enclosure{:url => item.link, :length => item.sizebytes, :type => 'application/x-bittorrent'}
+      %pubDate= item.published

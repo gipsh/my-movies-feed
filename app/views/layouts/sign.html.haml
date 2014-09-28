@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %title Movie feed generator (BETA)
+    = stylesheet_link_tag "web_app_theme"
+    = stylesheet_link_tag 'style'
+    = stylesheet_link_tag 'base'
+    = javascript_include_tag 'application'
+    = csrf_meta_tag
+  %body
+    #container
+      #box
+        = yield

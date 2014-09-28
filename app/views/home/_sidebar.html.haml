@@ -1,0 +1,6 @@
+.block
+  %h3 Last items on your feed 
+  %ul.navigation
+    - @feed.each do |item|
+      %li
+        = link_to item.title, item

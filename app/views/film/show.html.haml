@@ -1,0 +1,22 @@
+#block-text.block
+  .content
+    %h2.title= @film.title+ " (" + @film.year + ")"
+    .inner
+      - if user_signed_in?           
+        - if @alredy 
+          %div= link_to "#{t("web-app-theme.new", :default => "Remove from my feed")}", user_film_path(@current_user, @film), :method => :delete
+        - else
+          %div= link_to "#{t("web-app-theme.new", :default => "Add to my feed")}", new_user_film_path(@current_user, @film)
+      %ul
+        %li= link_to("imdb", @film.imdb)
+        %li= "imdb rating: " + @film.rating
+        %li= "genre: " + @film.genere
+        %li= "quality: " + @film.quality
+        %li= link_to("magnet", @film.magnet)
+        %li= link_to("torrent", @film.link)
+        %li= "file size: " + @film.size
+        %p= @film.description
+        %li= image_tag(@film.cover)
+
+  
+  %p= link_to("<< back", "/")
